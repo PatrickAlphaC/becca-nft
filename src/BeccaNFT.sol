@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+pragma solidity 0.8.7;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "base64-sol/base64.sol";
@@ -7,6 +7,7 @@ import "base64-sol/base64.sol";
 contract BeccaNFT is ERC721 {
     uint256 public constant SECONDS_IN_YEAR = 31540000;
     uint256 private immutable i_startingTimeStamp;
+    string private constant BASE_URI = "data:application/json;base64,";
 
     string[21] private s_images = [
         "ipfs://Qmb5MuG5pCrTtWix9xnNHfVRjXToVwW9gAP2tV814Mp1Y3", // image 3 is index 0
@@ -46,13 +47,13 @@ contract BeccaNFT is ERC721 {
         return
             string(
                 abi.encodePacked(
-                    _baseURI(),
+                    BASE_URI,
                     Base64.encode(
                         bytes(
                             abi.encodePacked(
                                 '{"name":"',
                                 name(), // You can add whatever name here
-                                '", "description":"Bex & Patrick - Just a frog and a penguin chilling with a toaster in the cloud... \n\nAlso there is a gator.", ',
+                                '", "description":"Bex & Patrick - Just a frog and a penguin chilling with a toaster in the cloud...Also there is a gator.", ',
                                 '"attributes": [{"trait_type": "cuteness", "value": 100}], "image":"',
                                 imageURI,
                                 '"}'

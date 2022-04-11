@@ -10,7 +10,7 @@ clean:; forge clean
 # Remove modules
 remove :; rm -rf .gitmodules && rm -rf .git/modules/* && rm -rf lib && touch .gitmodules && git add . && git commit -m "modules"
 
-install :; forge install dapphub/ds-test && forge install OpenZeppelin/openzeppelin-contracts && forge install brockelmore/forge-std 
+install :; forge install dapphub/ds-test && forge install OpenZeppelin/openzeppelin-contracts && forge install brockelmore/forge-std && forge install Brechtpd/base64
 
 # Update Dependencies
 update:; forge update
@@ -22,5 +22,9 @@ test   :; forge clean && forge test --optimize --optimize-runs 1000000 -v
 # Lints
 format :; yarn prettier --write src/**/*.sol && prettier --write src/*.sol
 
-# Deploy rinkeby
-deploy-rinkeby:; forge create ./src/BeccaNFT.sol:BeccaNFT -i --rpc-url $RINKEBY_RPC_URL 
+# Deploy - remember to append '0x' to your private key
+deploy-rinkeby:; forge create ./src/BeccaNFT.sol:BeccaNFT -i --rpc-url ${RINKEBY_RPC_URL}
+deploy-mainnet:; forge create ./src/BeccaNFT.sol:BeccaNFT -i --rpc-url ${MAINNET_RPC_URL}
+
+# Verify
+verify:; forge verify-contract --chain-id 4 --compiler-version v0.8.7+commit.e28d00a7 {YOUR_ADDRESS} src/BeccaNFT.sol:BeccaNFT $ETHERSCAN_TOKEN
