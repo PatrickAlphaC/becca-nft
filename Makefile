@@ -27,4 +27,4 @@ deploy-rinkeby:; forge create ./src/BeccaNFT.sol:BeccaNFT -i --rpc-url ${RINKEBY
 deploy-mainnet:; forge create ./src/BeccaNFT.sol:BeccaNFT -i --rpc-url ${MAINNET_RPC_URL}
 
 # Verify
-verify:; forge verify-contract --chain-id 4 --compiler-version v0.8.7+commit.e28d00a7 {YOUR_ADDRESS} src/BeccaNFT.sol:BeccaNFT $ETHERSCAN_TOKEN
+verify:; forge verify-contract --chain-id 1 --compiler-version v0.8.7+commit.e28d00a7 0xe41b658481db72b02089bc514d18207a14aefbc5 src/BeccaNFT.sol:BeccaNFT $ETHERSCAN_TOKEN
